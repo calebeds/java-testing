@@ -5,6 +5,11 @@ import org.calebe.article.Type;
 import org.calebe.client.Channel;
 import org.calebe.database.ArticleDataAccess;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Arrays;
@@ -12,15 +17,22 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-
+@RunWith(MockitoJUnitRunner.class)
 public class ArticleDistributorTest {
+    @Mock
+    private Channel sport;
+    @Mock
+    private Channel entertainment;
+    @Mock
+    private Channel other;
+    @Mock
+    private ArticleDataAccess dataAccess;
+    @InjectMocks
+    private ArticleDistributor articleDistributor;
+
     @Test
     public void sportGoesToSportPoliticsToOther() {
-        Channel sport = mock(Channel.class);
-        Channel entertainment = mock(Channel.class);
-        Channel other = mock(Channel.class);
-        ArticleDataAccess dataAccess = mock(ArticleDataAccess.class);
-        ArticleDistributor articleDistributor = new ArticleDistributor(sport, entertainment, other, dataAccess);
+
 
 
         //Given this list of articles is returned from the database
