@@ -2,6 +2,9 @@ package org.calebe.sender;
 
 import org.calebe.article.Article;
 import org.calebe.client.Channel;
+import org.calebe.client.EntertainmentChannel;
+import org.calebe.client.OtherChannel;
+import org.calebe.client.SportsChannel;
 import org.calebe.database.ArticleDataAccess;
 
 /**
@@ -13,7 +16,7 @@ public class ArticleDistributor {
     private Channel other;
     private ArticleDataAccess dataAccess;
 
-    public ArticleDistributor(Channel sport, Channel entertainment, Channel other, ArticleDataAccess dataAccess) {
+    public ArticleDistributor(SportsChannel sport, EntertainmentChannel entertainment, OtherChannel other, ArticleDataAccess dataAccess) {
         this.sport = sport;
         this.entertainment = entertainment;
         this.other = other;

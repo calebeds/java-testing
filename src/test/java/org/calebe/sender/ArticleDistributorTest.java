@@ -3,7 +3,11 @@ package org.calebe.sender;
 import org.calebe.article.Article;
 import org.calebe.article.Type;
 import org.calebe.client.Channel;
+import org.calebe.client.EntertainmentChannel;
+import org.calebe.client.OtherChannel;
+import org.calebe.client.SportsChannel;
 import org.calebe.database.ArticleDataAccess;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,11 +24,11 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ArticleDistributorTest {
     @Mock
-    private Channel sport;
+    private SportsChannel sport;
     @Mock
-    private Channel entertainment;
+    private EntertainmentChannel entertainment;
     @Mock
-    private Channel other;
+    private OtherChannel other;
     @Mock
     private ArticleDataAccess dataAccess;
     @InjectMocks
@@ -32,9 +36,6 @@ public class ArticleDistributorTest {
 
     @Test
     public void sportGoesToSportPoliticsToOther() {
-
-
-
         //Given this list of articles is returned from the database
         List<Article> list = Arrays.asList(
                 new Article("Sport is fun", Type.SPORT),
@@ -47,7 +48,7 @@ public class ArticleDistributorTest {
 
         // Then one goes to sport and one goes to other
         verify(sport).accept((Article) any());
-        verify(other, times(1)).accept((Article) any());
+        verify(other).accept((Article) any());
         verify(entertainment, never()).accept((Article) any());
     }
 }
