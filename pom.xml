@@ -5,14 +5,27 @@
   <artifactId>articlesender</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
   <name>articlesender</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>4.1.0</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
+
 </project>

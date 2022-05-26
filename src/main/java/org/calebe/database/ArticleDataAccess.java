@@ -8,5 +8,5 @@ public interface ArticleDataAccess {
     /**
      * @return all the articles from today
      */
-    List<Article> getTodayArticles();
+    List<Article> getTodaysArticles();
 }
