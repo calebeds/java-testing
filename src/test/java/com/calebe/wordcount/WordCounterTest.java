@@ -50,10 +50,26 @@ public class WordCounterTest {
     }
 
     @Test
-    public void inputWIthDupliatesCountsOnlyIndividualCases() {
+    public void inputWIthDuplicatesCountsOnlyIndividualCases() {
         counter.add("Nine Nine Nine");
 
         assertEquals(1, counter.getUniqueWordsCount());
+    }
+
+    @Test
+    public void inputWithMixedCaseDuplicatesCountsOnlyIndividualCases() {
+        counter.add("Nine nine NINE");
+
+        assertEquals(1, counter.getUniqueWordsCount());
+    }
+
+    @Test
+    public void inputWithPunctuationStillSpotsDuplicates() {
+        counter.add("Nine.");
+        counter.add("Nine ten.");
+        counter.add("Nine, ten, eleven.");
+
+        assertEquals(3, counter.getUniqueWordsCount());
     }
 
 }
