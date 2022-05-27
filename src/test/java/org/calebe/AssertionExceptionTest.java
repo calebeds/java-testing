@@ -3,11 +3,16 @@ package org.calebe;
 import org.junit.Test;
 
 import java.io.IOException;
+import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.offset;
 
 public class AssertionExceptionTest {
-    @Test(expected = IOException.class)
+    @Test
     public void willThrowThrows() throws Exception{
-        willThrow();
+        assertThatThrownBy(() -> willThrow())
+                .isInstanceOf(IOException.class)
+                .hasMessage("Bang");
+        // DO FINAL CHECKS
     }
 
 
