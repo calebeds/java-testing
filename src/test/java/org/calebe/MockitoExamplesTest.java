@@ -12,6 +12,7 @@ import org.mockito.stubbing.Answer;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Predicate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -154,5 +155,12 @@ public class MockitoExamplesTest {
                 .add(31);
         System.out.println(set.contains(31));
 
+    }
+
+    @Test
+    public void mockPredicate() {
+        Predicate<Integer> predicate = i -> i == 12;
+
+        assertTrue(predicate.test(12));
     }
 }
