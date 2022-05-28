@@ -7,6 +7,7 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -73,5 +74,13 @@ public class MockitoExamplesTest {
         someInterface.receiveList(Arrays.asList("A", "B", "C"));
         // Capture argument and verify it
         verify(someInterface).receiveList(argThat(list -> list.size() == 3));
+    }
+
+    @Test(expected = IOException.class)
+    public void willThrow() throws Exception {
+        when(someInterface.isFileValid("myFile")).thenThrow(new IOException("Boom"));
+
+        // when we run the code that uses the mock
+        someInterface.isFileValid("myFile");
     }
 }
