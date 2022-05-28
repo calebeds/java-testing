@@ -11,13 +11,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.Matcher.*;
@@ -131,5 +129,30 @@ public class MockitoExamplesTest {
             }
         }
         return false;
+    }
+
+    @Test
+    public void bddMockito() throws Exception {
+        //given a mock set up to validate my file
+        given(someInterface.isFileValid("myFile"))
+                .willReturn(true);
+
+        //when we validate my file
+        boolean isValid = someInterface.isFileValid("myFile");
+
+        //then the answer is "Valid"
+        assertTrue(isValid);
+    }
+
+    @Test
+    public void whenWhenIsNotEnough() {
+        Set<Integer> set = spy(new HashSet<>());
+
+//        when(set.add(31)).thenThrow(new RuntimeException());
+        doThrow(new RuntimeException("Boom"))
+                .when(set)
+                .add(31);
+        System.out.println(set.contains(31));
+
     }
 }
