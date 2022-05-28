@@ -5,7 +5,10 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
+import org.mockito.internal.stubbing.answers.AnswersWithDelay;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -82,5 +85,20 @@ public class MockitoExamplesTest {
 
         // when we run the code that uses the mock
         someInterface.isFileValid("myFile");
+    }
+
+    @Test
+    public void thenAnswer() {
+        when(someInterface.getMatchingSize(anyInt(), anyInt())).thenAnswer(new Answer<Integer>(){
+
+            @Override
+            public Integer answer(InvocationOnMock invocationOnMock) throws Throwable {
+                return (int) invocationOnMock.getArguments()[0] + (int) invocationOnMock.getArguments()[1];
+            }
+        });
+
+        //assert the mock... in real life
+        //we would assert the outcome code using the mocks
+        assertEquals(4, someInterface.getMatchingSize(1, 3));
     }
 }
