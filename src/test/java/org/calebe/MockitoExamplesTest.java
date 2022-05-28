@@ -12,9 +12,12 @@ import org.mockito.stubbing.Answer;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.Matcher.*;
@@ -100,5 +103,33 @@ public class MockitoExamplesTest {
         //assert the mock... in real life
         //we would assert the outcome code using the mocks
         assertEquals(4, someInterface.getMatchingSize(1, 3));
+    }
+
+    @Test
+    public void spying() {
+        Set<Integer> set = spy(new LinkedHashSet<>());
+
+        calculatePrimes(set, 100);
+
+        assertTrue(set.contains(31));
+
+        verify(set).add(31);
+    }
+
+    private static void calculatePrimes(Set<Integer> primes, int max) {
+        for(int i = 2; i <= max; i++) {
+            if(!divisibleByAny(i, primes)){
+                primes.add(i);
+            }
+        }
+    }
+
+    private static boolean divisibleByAny(int newNumber, Set<Integer> primes) {
+        for(Integer prime: primes) {
+            if(newNumber % prime == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }
